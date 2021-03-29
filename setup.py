@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 import os
-from setuptools import setup
+from setuptools import setup, find_packages
 
 with open('README.md', 'r') as f:
     readme_content = f.read()
-version_string = '0.1.3'
+version_string = '0.2.0'
 
 setup(
     name='fuzzer-cov',
@@ -17,7 +17,7 @@ setup(
     author='Myriad Dreamin',
     author_email='camiyoru@gmail.com',
     license='MIT',
-    packages=['fuzzer_cov'],
+    packages=find_packages(),
     install_requires=[],
     classifiers=[
         #   3 - Alpha
