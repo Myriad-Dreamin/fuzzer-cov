@@ -4,7 +4,7 @@ from setuptools import setup
 
 with open('README.md', 'r') as f:
     readme_content = f.read()
-version_string = '0.1.2'
+version_string = '0.1.3'
 
 setup(
     name='fuzzer-cov',
@@ -16,7 +16,7 @@ setup(
     author='Myriad Dreamin',
     author_email='camiyoru@gmail.com',
     license='MIT',
-    packages=['fuzzer-cov'],
+    packages=['fuzzer_cov'],
     install_requires=[],
     classifiers=[
         #   3 - Alpha
