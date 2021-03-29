@@ -1,0 +1,8 @@
+
+# build directory
+build
+dist
+fuzzer_cov.egg-info
+
+# python cache
+**/*/__pycache__
