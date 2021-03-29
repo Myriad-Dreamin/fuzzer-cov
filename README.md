@@ -3,8 +3,9 @@
 
 fuzzer coverage tool, generate readable coverage report in html format
 
-## Prerequisite: Install lcov package
+## Prerequisite
 
+### Install lcov package
 on ubuntu:
 
 ```shell
@@ -30,8 +31,11 @@ print help
 
 ```shell
 $ python3 -m fuzzer_cov --help
-usage: __main__.py [-h] --fuzzer FUZZER -s SRC -o OUT -c CORPUS_DIR [--lcov-follow-links] [--enable-branch-coverage] [--lcov-exclude-pattern LCOV_EXCLUDE_PATTERN]
-                   [--lcov-path LCOV_PATH] [--gen-html-path GEN_HTML_PATH] [-v] [-V] [-q]
+usage: __main__.py [-h] --fuzzer FUZZER -s SRC -o OUT -c CORPUS_DIR
+                   [--lcov-follow-links] [--enable-branch-coverage]
+                   [--lcov-exclude-pattern LCOV_EXCLUDE_PATTERN]
+                   [--lcov-path LCOV_PATH] [--gen-html-path GEN_HTML_PATH]
+                   [-v] [-V] [-q]
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -42,7 +46,8 @@ optional arguments:
                         Corpus (inputs) Directory
   --lcov-follow-links   Follow links when searching .da files
   --enable-branch-coverage
-                        Include branch coverage in code coverage reports (may be slow)
+                        Include branch coverage in code coverage reports (may
+                        be slow)
   --lcov-exclude-pattern LCOV_EXCLUDE_PATTERN
                         Set exclude pattern for lcov results
   --lcov-path LCOV_PATH
@@ -52,4 +57,5 @@ optional arguments:
   -v, --verbose         Verbose mode
   -V, --version         Print version and exit
   -q, --quiet           Quiet mode
+
 ```
