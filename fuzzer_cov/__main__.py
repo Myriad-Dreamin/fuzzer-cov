@@ -104,8 +104,7 @@ def parse_cmdline():
 
     return p.parse_args()
 
-def get_fuzzer_cov_opts_from_command_line_options(opts: Opts):
-    args = parse_cmdline()
+def get_fuzzer_cov_opts_from_command_line_options(opts: Opts, args: object):
     opts.lcov_path = args.lcov_path
     opts.gen_html_path = args.gen_html_path
 
@@ -126,8 +125,9 @@ def get_fuzzer_cov_opts_from_command_line_options(opts: Opts):
 
 def main():
     # Setup Environment Values
+    args = parse_cmdline()
     opts = Opts()
-    get_fuzzer_cov_opts_from_command_line_options(opts)
+    get_fuzzer_cov_opts_from_command_line_options(opts, args)
 
     clean = True
 
