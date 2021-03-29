@@ -3,15 +3,19 @@ import argparse
 import os
 from pathlib import Path
 
-from fuzzer_cov import BuildContainerImpl
+from fuzzer_cov.core.container import BuildContainerImpl
 
-from fuzzer_cov import Logger, LoggerImpl
+from fuzzer_cov.core import Logger
+from fuzzer_cov.core.logger import LoggerImpl
 
-from fuzzer_cov import FuzzerExecutor
+from fuzzer_cov.core import FuzzerExecutor
 from fuzzer_cov.executor.libfuzzer import LibFuzzerInstanceExecutor
 
-from fuzzer_cov import LCovRunner, LCovOutputPathPolicy
-from fuzzer_cov import GenHtmlRunner, GenHtmlOutputPathPolicy
+from fuzzer_cov.core import CommandExecutor
+from fuzzer_cov.platform.executor import CommandExecutorImpl
+
+from fuzzer_cov.platform.lcov import LCovRunner, LCovOutputPathPolicy
+from fuzzer_cov.platform.genhtml import GenHtmlRunner, GenHtmlOutputPathPolicy
 
 class InvalidOpts(Exception): pass
 
@@ -138,6 +142,7 @@ def main():
     # create container
     container = BuildContainerImpl(opts)
     container.register_impl(LoggerImpl, Logger)
+    container.register_impl(CommandExecutorImpl, CommandExecutor)
     container.register_impl(LibFuzzerInstanceExecutor, FuzzerExecutor)
     container.register_impl(LCovRunner)
     container.register_impl(LCovOutputPathPolicy)
