@@ -1,7 +1,7 @@
 
-# fuzz-cov
+# fuzzer-cov
 
-programmable fuzzer coverage tool, generate readable coverage report in html format 
+fuzzer coverage tool, generate readable coverage report in html format
 
 ## Prerequisite: Install lcov package
 
@@ -14,6 +14,5 @@ apt-get install lcov
 ## Installation
 
 ```shell
-python3 -m pip install fuzz-cov
+python3 -m pip install fuzzer-cov
 ```
-
