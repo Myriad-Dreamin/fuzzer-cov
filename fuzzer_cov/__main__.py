@@ -4,8 +4,12 @@ import os
 from pathlib import Path
 
 from fuzzer_cov import BuildContainerImpl
+
 from fuzzer_cov import Logger, LoggerImpl
-from fuzzer_cov import FuzzerExecutor, LibFuzzerInstanceExecutor
+
+from fuzzer_cov import FuzzerExecutor
+from fuzzer_cov.executor.libfuzzer import LibFuzzerInstanceExecutor
+
 from fuzzer_cov import LCovRunner, LCovOutputPathPolicy
 from fuzzer_cov import GenHtmlRunner, GenHtmlOutputPathPolicy
 
