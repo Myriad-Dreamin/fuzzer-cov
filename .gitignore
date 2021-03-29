@@ -6,3 +6,6 @@ fuzzer_cov.egg-info
 
 # python cache
 **/*/__pycache__
+
+# example output
+*.log

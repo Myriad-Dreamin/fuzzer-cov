@@ -6,50 +6,7 @@ import subprocess
 import os
 import argparse
 from pathlib import Path
-
-try:
-    from typing import Protocol
-except ImportError:
-    from typing_extensions import Protocol
-
-
-T = typing.TypeVar('T')
-class BuildContainer(Protocol):
-    opts: object
-
-    def register_impl(self, t: type, p: type=None):
-        raise NotImplementedError
-
-    def resolve(self, t: typing.Type[T]) -> T:
-        raise NotImplementedError
-
-class FuzzerExecutor(Protocol):
-    def __init__(self, container: BuildContainer):
-        raise NotImplementedError
-    
-    def exec_one_file(self, case_file: str, silent: int=1):
-        raise NotImplementedError
-    
-    def exec_corpus_set(self, corpus_dir: str, silent: int=1):
-        raise NotImplementedError
-
-
-class Logger(Protocol):
-
-    def verbose(self, msg, log_obj=None):
-        raise NotImplementedError
-
-    def info(self, msg, log_obj=None):
-        raise NotImplementedError
-
-    def warn(self, msg, log_obj=None):
-        raise NotImplementedError
-
-    def debug(self, msg, log_obj=None):
-        raise NotImplementedError
-
-    def critical(self, msg, log_obj=None):
-        raise NotImplementedError
+from fuzzer_cov.core import BuildContainer, Logger, FuzzerExecutor
 
 class CommandExecutor(object):
     def __init__(self, container: BuildContainer):
@@ -254,7 +211,7 @@ class BuildContainerImpl(BuildContainer):
             self.type_protocols[p] = t
         self.type_protocols[t] = t
 
-    def resolve(self, t: typing.Type[T]) -> T:
+    def resolve(self, t: typing.Type[BuildContainer.T]) -> BuildContainer.T:
         return self.type_protocols[t](self)
 
 
@@ -276,45 +233,3 @@ class LoggerImpl(Logger):
 
     def critical(self, msg, log_obj=None):
         print(msg, log_obj)
-
-
-class InvalidOpts(Exception): pass
-
-
-class Opts(object):
-    fuzzer_path: str
-    source_dir: str
-    output_dir: str
-    lcov_output_dir: str
-    gen_html_output_dir: str
-    enable_branch_coverage: bool
-    lcov_follow_links: bool
-    lcov_exclude_pattern: str
-    lcov_path: str
-    gen_html_path: str
-
-    def __init__(self):
-        self.lcov_path = 'lcov'
-        self.gen_html_path = 'genhtml'
-        # default False
-        self.enable_branch_coverage = False
-        self.lcov_follow_links = False
-    
-    def validate(self):
-        if not self.lcov_path:
-            return InvalidOpts("must set lcov_path, got empty string")
-        if not self.gen_html_path:
-            return InvalidOpts("must set gen_html_path, got empty string")
-        if not self.fuzzer_path:
-            return InvalidOpts("must set fuzzer_path, got empty string")
-        if not self.source_dir:
-            return InvalidOpts("must set source_dir, got empty string")
-        if not self.output_dir:
-            return InvalidOpts("must set output_dir, got empty string")
-        if not self.lcov_output_dir:
-            return InvalidOpts("must set lcov_output_dir, got empty string")
-        if not self.gen_html_output_dir:
-            return InvalidOpts("must set gen_html_output_dir, got empty string")
-        if not self.gen_html_output_dir:
-            return InvalidOpts("must set gen_html_output_dir, got empty string")
-        return None

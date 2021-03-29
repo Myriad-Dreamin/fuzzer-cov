@@ -12,6 +12,7 @@ setup(
     long_description=readme_content,
     long_description_content_type='text/markdown',
     url='https://github.com/Myriad-Dreamin/fuzzer-cov',
+    
     download_url=f'https://github.com/Myriad-Dreamin/fuzzer-cov/archive/v{version_string}.tar.gz',
     author='Myriad Dreamin',
     author_email='camiyoru@gmail.com',

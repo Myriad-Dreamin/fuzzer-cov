@@ -3,12 +3,51 @@ import argparse
 import os
 from pathlib import Path
 
-from fuzzer_cov import Opts
 from fuzzer_cov import BuildContainerImpl
 from fuzzer_cov import Logger, LoggerImpl
 from fuzzer_cov import FuzzerExecutor, LibFuzzerInstanceExecutor
 from fuzzer_cov import LCovRunner, LCovOutputPathPolicy
 from fuzzer_cov import GenHtmlRunner, GenHtmlOutputPathPolicy
+
+class InvalidOpts(Exception): pass
+
+class Opts(object):
+    fuzzer_path: str
+    source_dir: str
+    output_dir: str
+    lcov_output_dir: str
+    gen_html_output_dir: str
+    enable_branch_coverage: bool
+    lcov_follow_links: bool
+    lcov_exclude_pattern: str
+    lcov_path: str
+    gen_html_path: str
+
+    def __init__(self):
+        self.lcov_path = 'lcov'
+        self.gen_html_path = 'genhtml'
+        # default False
+        self.enable_branch_coverage = False
+        self.lcov_follow_links = False
+    
+    def validate(self):
+        if not self.lcov_path:
+            return InvalidOpts("must set lcov_path, got empty string")
+        if not self.gen_html_path:
+            return InvalidOpts("must set gen_html_path, got empty string")
+        if not self.fuzzer_path:
+            return InvalidOpts("must set fuzzer_path, got empty string")
+        if not self.source_dir:
+            return InvalidOpts("must set source_dir, got empty string")
+        if not self.output_dir:
+            return InvalidOpts("must set output_dir, got empty string")
+        if not self.lcov_output_dir:
+            return InvalidOpts("must set lcov_output_dir, got empty string")
+        if not self.gen_html_output_dir:
+            return InvalidOpts("must set gen_html_output_dir, got empty string")
+        if not self.gen_html_output_dir:
+            return InvalidOpts("must set gen_html_output_dir, got empty string")
+        return None
 
 def parse_cmdline():
 
@@ -64,11 +103,8 @@ def parse_cmdline():
     #         help="Validate args and exit", default=False)
 
     return p.parse_args()
- 
-def main():
-    # Setup Environment Values
-    opts = Opts()
 
+def get_fuzzer_cov_opts_from_command_line_options(opts: Opts):
     args = parse_cmdline()
     opts.lcov_path = args.lcov_path
     opts.gen_html_path = args.gen_html_path
@@ -87,6 +123,11 @@ def main():
     maybe_err = opts.validate()
     if maybe_err is not None:
         raise maybe_err # pylint: disable-msg=E0702
+
+def main():
+    # Setup Environment Values
+    opts = Opts()
+    get_fuzzer_cov_opts_from_command_line_options(opts)
 
     clean = True
 
