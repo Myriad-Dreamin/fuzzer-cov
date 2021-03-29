@@ -22,14 +22,16 @@ Verify that the pacakge is installed successfully.
 
 ```shell
 $ python3 -m fuzzer_cov --help
-## output of command help ##
+{{insert_point:`python3 -m fuzzer_cov --help`}}
 ```
 
 ## CLI Usage
 
-print help
+### LibFuzzer
+
+generate coverage report for [LibFuzzer](https://llvm.org/docs/LibFuzzer.html).
 
 ```shell
-$ python3 -m fuzzer_cov --help
-{{insert_point:`python3 -m fuzzer_cov --help`}}
+$ python3 -m fuzzer_cov.commands.libfuzzer --help
+{{insert_point:`python3 -m fuzzer_cov.commands.libfuzzer --help`}}
 ```

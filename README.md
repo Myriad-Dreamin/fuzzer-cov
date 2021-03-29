@@ -22,20 +22,29 @@ Verify that the pacakge is installed successfully.
 
 ```shell
 $ python3 -m fuzzer_cov --help
-## output of command help ##
+usage: fuzzer_cov [-h] [--version]
+
+optional arguments:
+  -h, --help  show this help message and exit
+  --version   print version string
+
 ```
 
 ## CLI Usage
 
-print help
+### LibFuzzer
+
+generate coverage report for [LibFuzzer](https://llvm.org/docs/LibFuzzer.html).
 
 ```shell
-$ python3 -m fuzzer_cov --help
-usage: __main__.py [-h] --fuzzer FUZZER -s SRC -o OUT -c CORPUS_DIR
-                   [--lcov-follow-links] [--enable-branch-coverage]
-                   [--lcov-exclude-pattern LCOV_EXCLUDE_PATTERN]
-                   [--lcov-path LCOV_PATH] [--gen-html-path GEN_HTML_PATH]
-                   [-v] [-V] [-q]
+$ python3 -m fuzzer_cov.commands.libfuzzer --help
+usage: fuzzer_cov.commands.libfuzzer [-h] --fuzzer FUZZER -s SRC -o OUT -c
+                                     CORPUS_DIR [--lcov-follow-links]
+                                     [--enable-branch-coverage]
+                                     [--lcov-exclude-pattern LCOV_EXCLUDE_PATTERN]
+                                     [--lcov-path LCOV_PATH]
+                                     [--gen-html-path GEN_HTML_PATH] [-v] [-V]
+                                     [-q]
 
 optional arguments:
   -h, --help            show this help message and exit

@@ -4,16 +4,16 @@ from setuptools import setup, find_packages
 
 with open('README.md', 'r') as f:
     readme_content = f.read()
-version_string = '0.2.0'
+from fuzzer_cov import version
 
 setup(
     name='fuzzer-cov',
-    version=version_string,
+    version=version,
     long_description=readme_content,
     long_description_content_type='text/markdown',
     url='https://github.com/Myriad-Dreamin/fuzzer-cov',
     
-    download_url=f'https://github.com/Myriad-Dreamin/fuzzer-cov/archive/v{version_string}.tar.gz',
+    download_url=f'https://github.com/Myriad-Dreamin/fuzzer-cov/archive/v{version}.tar.gz',
     author='Myriad Dreamin',
     author_email='camiyoru@gmail.com',
     license='MIT',

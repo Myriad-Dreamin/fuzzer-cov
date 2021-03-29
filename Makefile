@@ -22,6 +22,6 @@ protobuf_fuzz_cov_options += -c $(protobuf_fuzz_dir)/fuzz-corpus3/a
 protobuf_fuzz_cov_options += --lcov-exclude-pattern "$(protobuf_fuzz_dir)/src/userspace/\*"
 
 protobuf-fuzz-example:
-	$(fuzzer_cov_python) -m fuzzer_cov $(protobuf_fuzz_cov_options) 
+	$(fuzzer_cov_python) -m fuzzer_cov.commands.libfuzzer $(protobuf_fuzz_cov_options) 
 
 .PHONY: build upload main
